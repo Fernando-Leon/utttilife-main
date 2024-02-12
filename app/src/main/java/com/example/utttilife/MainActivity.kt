@@ -71,22 +71,26 @@ fun AppScaffold() {
         topBar = {
             CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    containerColor = MaterialTheme.colorScheme.onPrimary,
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
                     Row {
                         Text(
-                            "UTTT",
+                            "UTTT ",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            color = Color.Black
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.Black
                         )
                         Text(
                             "ILIFE",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            color = Color.Green
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.Black
                         )
                     }
                 },
