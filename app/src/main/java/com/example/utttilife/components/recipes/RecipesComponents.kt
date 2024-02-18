@@ -259,7 +259,7 @@ suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispa
                     "content": [
                         {
                             "type": "text",
-                            "text": "Identifica los ingredientes de la siguiente imagen y genera una receta en base a los ingredientes especificados, solo devuelveme el nombre de la receta y el como prepararla"
+                            "text": "Identifica los ingredientes de la siguiente imagen y genera una receta en base a los ingredientes especificados, solo devuelveme el nombre de la receta y el como prepararla y trata de ser lo mas claro posible"
                         },
                         {
                             "type": "image_url",
@@ -270,7 +270,7 @@ suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispa
                     ]
                 }
             ],
-            "max_tokens": 500
+            "max_tokens": 800
         }
     """.trimIndent()
 
