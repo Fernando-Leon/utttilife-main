@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.utttilife.components.recipes.Camera
-import com.example.utttilife.components.recipes.Content
 import com.example.utttilife.components.recipes.ContentScroll
+import com.example.utttilife.components.recipes.ContentSend
 import com.example.utttilife.components.recipes.ImageSelector
 import com.example.utttilife.components.recipes.MainViewModel
 import com.example.utttilife.components.recipes.OpenCamera
@@ -38,8 +38,10 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 
+//Componente que organiza los botones en un Scaffold
 @Composable
 fun LayoutContent(navController: NavController, viewModel: MainViewModel) {
+    //Variable que almacena la respuesta
     val response = remember { mutableStateOf("1.- Selecciona o toma una imagen.\n2.- Presiona el botón de enviar.\n3.- A cocinar!.") }
 
     Scaffold(
@@ -53,7 +55,7 @@ fun LayoutContent(navController: NavController, viewModel: MainViewModel) {
                 ) {
                     OpenCamera(navController)
                     ImageSelector(viewModel.selectedImage)
-                    Content(viewModel.selectedImage.value, response)
+                    ContentSend(viewModel.selectedImage.value, response)
                 }
             }
         }
@@ -62,20 +64,26 @@ fun LayoutContent(navController: NavController, viewModel: MainViewModel) {
     }
 }
 
+// Componente para abrir la cámara
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraImage(navController: NavController, onImageCaptured: (Bitmap) -> Unit, context: Context) {
+    // Obtenemos el estado del permiso para la cámara
     val permissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
+    // Creamos un controlador de cámara que recuerda su estado de ciclo de vida
     val cameraController = remember {
         LifecycleCameraController(context)
     }
+    // Obtenemos el ciclo de vida actual
     val lifeCycle = LocalLifecycleOwner.current
 
-    LaunchedEffect(Unit){
+    // Solicitamos el permiso de cámara
+    LaunchedEffect(Unit) {
         permissionState.launchPermissionRequest()
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
+        // Si el permiso está concedido, mostramos la vista de cámara y el botón para tomar la foto
         if (permissionState.status.isGranted) {
             Camera(cameraController, lifeCycle, modifier = Modifier.padding(50.dp))
             FloatingActionButton(
@@ -90,6 +98,7 @@ fun CameraImage(navController: NavController, onImageCaptured: (Bitmap) -> Unit,
                 Icon(Icons.Default.CheckCircle, contentDescription = "Tomar foto")
             }
         } else {
+            // Si el permiso está denegado, mostramos un mensaje indicando que el permiso fue denegado
             Text(text = "Permiso denegado")
         }
     }

@@ -85,16 +85,25 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+//Funcion para tomar foto
 public fun takePicture(navController: NavController, cameraController: LifecycleCameraController, executor: Executor, context: Context, onImageCaptured: (Bitmap) -> Unit){
+    //Nombre por defecto que se le pondra a el archivo temporal generado
     val file = File.createTempFile("receta", ".jpg", context.externalCacheDir)
+    //Guardar las opciones de salida de la imagen capturada
     val outputOptions = ImageCapture.OutputFileOptions.Builder(file).build()
     cameraController.takePicture(outputOptions, executor, object : ImageCapture.OnImageSavedCallback{
+        //En caso de que la imagen se guarde correctamente pasa esto
         override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+            //Variable que guarda la ruta del archivo generado
             val savedUri = outputFileResults.savedUri ?: return
             try {
+                //Ruta del archivo selleccionado
                 val source = ImageDecoder.createSource(context.contentResolver, savedUri)
+                //Decodificamos la imagen
                 val bitmap = ImageDecoder.decodeBitmap(source)
+                //Pasamos la imagen capturada
                 onImageCaptured(bitmap)
+                //Regresar a la pantalla anterior despues de tomar la foto
                 navController.popBackStack()
             } catch (e: IOException) {
                 println("Ocurrio un error en: ${e.message}")
@@ -107,7 +116,7 @@ public fun takePicture(navController: NavController, cameraController: Lifecycle
     })
 }
 
-
+//Componente para la camara
 @Composable
 fun Camera(
     cameraController: LifecycleCameraController,
@@ -115,6 +124,7 @@ fun Camera(
     modifier: Modifier
 ){
     cameraController.bindToLifecycle(lifeCycle)
+    //Creamos una vista dentro del componente
     AndroidView(modifier = modifier, factory = {context ->
         val previewView = PreviewView(context).apply {
             layoutParams = ViewGroup.LayoutParams(
@@ -122,18 +132,22 @@ fun Camera(
                 ViewGroup.LayoutParams.FILL_PARENT,
             )
         }
+        //Previsualización de la camara
         previewView.controller = cameraController
         previewView
     })
 }
 
+//Componente para abrir camara
 @Composable
 fun OpenCamera(navController: NavController) {
+    //Icon button para ejecutar la acción
     IconButton(
         onClick = {
             navController.navigate("camera")
         }
     ) {
+        //Icono del botón
         Icon(
             painter = painterResource(id = R.drawable.camera),
             contentDescription = "Abrir Camara",
@@ -143,32 +157,39 @@ fun OpenCamera(navController: NavController) {
     }
 }
 
+//Componente para seleccionar imagen desde galeria
 @Composable
 fun ImageSelector(selectedImage: MutableState<Bitmap?>) {
+    //Almacenamos el contexto de la aplicación
     val context = LocalContext.current
-
+    //Obtener el content resolver
     val contentResolver: ContentResolver = context.contentResolver
-
+    //Recordamos el resultado de la actividad para obtener la imagen seleccionada de la galeria
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
+        //Actualizamos el valor con la imagen seleccionada
         selectedImage.value = uri?.let { decodeUri(contentResolver, it) }
     }
-
+    //Icon button para acceder a la galeria
     IconButton(onClick = { galleryLauncher.launch("image/*") }) {
         Icon(
-            painter = painterResource(id = R.drawable.add_image), tint = Color.Blue, contentDescription = "Agregar imagen",
+            painter = painterResource(id = R.drawable.add_image),
+            tint = Color.Blue,
+            contentDescription = "Agregar imagen",
             modifier = Modifier.size(30.dp)
         )
     }
 }
 
+//Componente para almacenar el contenido de nuestra app en un lazy column
 @Composable
 fun ContentScroll(
     selectedImage: MutableState<Bitmap?>,
     response: String,
     modifier: Modifier = Modifier
 ) {
+    //Items que tendra el lazy column
     LazyColumn(modifier = modifier) {
         item { Spacer(Modifier.height(50.dp)) }
         item { SelectedImageView(selectedImage) }
@@ -176,9 +197,11 @@ fun ContentScroll(
     }
 }
 
+//Componente que nos mostrara la imagen seleccionada
 @Composable
 fun SelectedImageView(selectedImage: MutableState<Bitmap?>) {
     selectedImage.value?.let { bitmap ->
+        //Box para almacenar la imagen
         Box(
             modifier = Modifier
                 .padding(16.dp)
@@ -198,8 +221,10 @@ fun SelectedImageView(selectedImage: MutableState<Bitmap?>) {
     }
 }
 
+//Componente para mostrar la respuesta de OpenAi
 @Composable
 fun ObtainedResponse(response: String){
+    //Box para almacenar la respuesta
     Box(
         modifier = Modifier
             .padding(16.dp)
@@ -219,11 +244,13 @@ fun ObtainedResponse(response: String){
     }
 }
 
+//Componente encargado para el envio de la imagen
 @Composable
-fun Content(selectedImageBitmap: Bitmap?, response: MutableState<String>) {
+fun ContentSend(selectedImageBitmap: Bitmap?, response: MutableState<String>) {
     val scope = rememberCoroutineScope()
 
     IconButton(onClick = {
+        //Relizamos la petición a OpenAi mediante Courotines
         try {
             selectedImageBitmap?.let {
                 scope.launch {
@@ -242,14 +269,17 @@ fun Content(selectedImageBitmap: Bitmap?, response: MutableState<String>) {
     }
 }
 
+//Función que obtiene hace la petición a la api de OpenAi
 suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispatchers.IO) {
+    //Definimos el api Key
     val apiKey = "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"
+    //Url del servicio
     val url = "https://api.openai.com/v1/chat/completions"
-
+    //Convertimos la imagen seleccionada a Base64
     val outputStream = ByteArrayOutputStream()
     selectedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
     val base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray())
-
+    //Definimos el cuerpo de la petición en formato JSON
     val requestBody = """
         {
             "model": "gpt-4-vision-preview",
@@ -273,29 +303,30 @@ suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispa
             "max_tokens": 800
         }
     """.trimIndent()
-
+    //Creamos nuestra petición
     val request = Request.Builder()
         .url(url)
         .addHeader("Content-Type", "application/json")
         .addHeader("Authorization", "Bearer $apiKey")
         .post(requestBody.toRequestBody("application/json".toMediaTypeOrNull()))
         .build()
-
+    //Establecemos el cliente y un tiempo de espera
     val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
         .build()
 
-
+    //Suspendemos la ejecución hasta que se reciba una respuesta
     suspendCoroutine { continuation ->
         client.newCall(request).enqueue(object : Callback {
+            //En caso de que falle se hace lo siguiente
             override fun onFailure(call: Call, e: IOException) {
                 println("Error en la llamada HTTP: ${e.message}")
                 e.printStackTrace()
                 continuation.resumeWith(Result.failure(e))
             }
-
+            //Si se obtiene una respuesta se hace lo siguiente
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     if (!response.isSuccessful) {
@@ -306,15 +337,21 @@ suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispa
 
                         continuation.resumeWith(Result.failure(IOException("Error: ${response.message}")))
                     } else {
+                        //Obtenemos el cuerpo de la respuesta
                         val body = response.body?.string()
+                        //Creamos un JSONonject a partir del cuerpo
                         val jsonObject = JSONObject(body)
 
                         if (jsonObject.has("choices")) {
+                            //Obtenemos el array llamado choices
                             val choicesArray = jsonObject.getJSONArray("choices")
                             if (choicesArray.length() > 0) {
+                                //Obtenemos el primer objeto JSON
                                 val firstChoice = choicesArray.getJSONObject(0)
                                 if (firstChoice.has("message") && firstChoice.getJSONObject("message").has("content")) {
+                                    //Obtenemos el contenido de content
                                     val content = firstChoice.getJSONObject("message").getString("content")
+                                    //Reanudamos la ejecución
                                     continuation.resume(content)
                                 }
                             }
@@ -326,9 +363,12 @@ suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispa
     }
 }
 
+//Decodifica un objeto URI en uno Bitmap
 private fun decodeUri(contentResolver: ContentResolver, uri: Uri): Bitmap? {
     return try {
+        // Abrimos un flujo de entrada desde la URI utilizando el ContentResolver.
         val inputStream = contentResolver.openInputStream(uri)
+        // Decodificamos el flujo de entrada en un objeto Bitmap utilizando BitmapFactory.
         BitmapFactory.decodeStream(inputStream)
     } catch (e: Exception) {
         e.printStackTrace()
@@ -336,6 +376,7 @@ private fun decodeUri(contentResolver: ContentResolver, uri: Uri): Bitmap? {
     }
 }
 
+//Clase que almacena la imagen
 class MainViewModel : ViewModel() {
     // Estado de la imagen seleccionada.
     val selectedImage: MutableState<Bitmap?> = mutableStateOf(null)
