@@ -16,7 +16,7 @@ fun IcomeScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Rentas",
+            text = "Asesorias",
             fontFamily = FontFamily.SansSerif,
             fontSize = 32.sp
         )
