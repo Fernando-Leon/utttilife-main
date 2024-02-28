@@ -42,7 +42,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 @Composable
 fun LayoutContent(navController: NavController, viewModel: MainViewModel) {
     //Variable que almacena la respuesta
-    val response = remember { mutableStateOf("1.- Selecciona o toma una imagen.\n2.- Presiona el botón de enviar.\n3.- A cocinar!.") }
+    val response = remember { mutableStateOf("Hola") }
 
     Scaffold(
         bottomBar = {
@@ -98,7 +98,6 @@ fun CameraImage(navController: NavController, onImageCaptured: (Bitmap) -> Unit,
                 Icon(Icons.Default.CheckCircle, contentDescription = "Tomar foto")
             }
         } else {
-            // Si el permiso está denegado, mostramos un mensaje indicando que el permiso fue denegado
             Text(text = "Permiso denegado")
         }
     }
