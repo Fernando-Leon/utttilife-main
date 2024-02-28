@@ -8,6 +8,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Agrega el permiso ACCESS_FINE_LOCATION para obtener una ubicación precisa -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Agrega el permiso ACCESS_COARSE_LOCATION para obtener una ubicación aproximada -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -30,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAR5KJqM3Jj_Gx-8bV3QVn6aa3hZVsOvEk"/>
     </application>
 
 </manifest>
