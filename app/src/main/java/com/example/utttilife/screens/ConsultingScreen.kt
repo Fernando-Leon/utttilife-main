@@ -18,6 +18,8 @@ import com.example.utttilife.components.friend.ChatViewModel
 import com.example.utttilife.components.friend.MessageView
 import com.example.utttilife.components.friend.UserInput
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.utttilife.components.friend.MessageFriend
+import com.example.utttilife.components.friend.MessageUser
 
 
 @Composable
@@ -39,9 +41,21 @@ fun ConsultingScreen(viewModel: ChatViewModel = viewModel()) {
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(10.dp))
-            LazyColumn(modifier = Modifier.weight(1f)) {
+            LazyColumn(
+                modifier = Modifier.weight(1f)) {
+
+                item {
+                    Spacer(modifier = Modifier.height(5.dp))
+                }
                 items(viewModel.messages) { message ->
                     MessageView(message = message.text, isUserMessage = message.isUser)
+                }
+                item {
+                    MessageView(message =  "Hola como estas", isUserMessage = false)
+                }
+
+                item {
+                    MessageView(message = "Muy bien", isUserMessage = true)
                 }
             }
             UserInput(onMessageSent = { viewModel.sendMessage(it) })

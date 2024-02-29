@@ -36,23 +36,24 @@ fun UserInput(onMessageSent: (String) -> Unit) {
     var text by remember { mutableStateOf("") }
 
     // Definir una altura común para TextField y Button
-    val commonHeight = 56.dp // Puedes ajustar este valor según tus necesidades
+    val commonHeight = 50.dp // Puedes ajustar este valor según tus necesidades
 
     Row(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(bottom = 16.dp, top = 16.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier
             .weight(1f)
+            .fillMaxWidth()
             .height(commonHeight)) { // Aplicar la altura común aquí
             TextField(
                 value = text,
                 onValueChange = { text = it },
                 modifier = Modifier
                     .fillMaxHeight() // Asegura que el TextField llene el Box
-                    .background(MaterialTheme.colorScheme.tertiaryContainer, RoundedCornerShape(50.dp)),
+                    .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(50.dp)),
                 shape = RoundedCornerShape(50.dp),
                 colors = TextFieldDefaults.textFieldColors(
                     containerColor = Color.Transparent,
@@ -63,9 +64,9 @@ fun UserInput(onMessageSent: (String) -> Unit) {
             )
         }
 
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = Modifier.width(5.dp))
 
-        Button(
+        Button (
             onClick = {
                 onMessageSent(text)
                 text = ""
