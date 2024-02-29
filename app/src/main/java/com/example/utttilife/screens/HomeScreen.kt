@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.utttilife.components.home.CardAdd
 import com.example.utttilife.components.home.CardConsulting
 import com.example.utttilife.components.home.CardIcome
 import com.example.utttilife.components.home.CardRecipes
@@ -27,6 +28,14 @@ fun HomeScreen(navController: NavController) {
 
         item {
             CardIcome(navController)
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+
+        item {
+            CardAdd(navController)
         }
 
         item {
