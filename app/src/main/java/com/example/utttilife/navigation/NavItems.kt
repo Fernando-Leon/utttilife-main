@@ -29,7 +29,7 @@ val listOfNavItems : List<NavItem> = listOf(
         route = Screens.IcomeScreen.name
     ),
     NavItem(
-        label = "Asesorias",
+        label = "Chat Amigo",
         icon = Icons.Default.Call,
         route = Screens.ConsultingScreen.name
     ),
