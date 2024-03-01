@@ -1,73 +1,114 @@
 package com.example.utttilife.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview
 @Composable
 fun RegisterScreen() {
-
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Register") {
         composable("Register") {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    "UTTT ",
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontSize = 25.sp,
+                                    fontWeight = FontWeight.Black
+                                )
+                                Text(
+                                    "ILIFE",
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    fontSize = 25.sp,
+                                    fontWeight = FontWeight.Black
+                                )
+                            }
+                        },
+                    )
+                }
             ) {
                 Box(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .border(0.dp, Color.White, shape = RoundedCornerShape(10.dp))
-                        .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
                 ) {
-                    LazyColumn(
+                    Box(
                         modifier = Modifier
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Top
+                            .padding(16.dp)
+                            .border(0.dp, Color.White, shape = RoundedCornerShape(10.dp))
+                            .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
                     ) {
-                        item {
-                            RegisterComponent(
-                                onReisterSuccess = {
-                                    navController.navigate("home") {
-                                        popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
-                                    }
-                                },
-                                onLoginSucess = {
-                                    navController.navigate("login") {
-                                        popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
-                                    }
-                                }, onTerminesAndConditioners = { navController.navigate("termines_and_conditioners") }
-                            )
+                        LazyColumn(
+                            modifier = Modifier
+                                .padding(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Top
+                        ) {
+                            item {
+                                RegisterComponent(
+                                    onReisterSuccess = {
+                                        navController.navigate("home") {
+                                            popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
+                                        }
+                                    },
+                                    onLoginSucess = {
+                                        navController.navigate("login") {
+                                            popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
+                                        }
+                                    }, onTerminesAndConditioners = { navController.navigate("termines_and_conditioners") }
+                                )
+                            }
                         }
                     }
                 }
             }
         }
-        composable("home"){
+        composable("home") {
             MainScreen()
         }
-        composable("login"){
+        composable("login") {
             LoginScreen()
         }
         composable("termines_and_conditioners") {
@@ -78,9 +119,4 @@ fun RegisterScreen() {
             )
         }
     }
-
-
 }
-
-
-
