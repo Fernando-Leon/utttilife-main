@@ -4,5 +4,6 @@ enum class Screens {
     HomeScreen,
     ConsultingScreen,
     IcomeScreen,
-    RecipesScreen
+    RecipesScreen,
+    RegisterApartament
 }

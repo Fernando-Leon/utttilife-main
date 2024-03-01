@@ -18,6 +18,7 @@ import com.example.utttilife.screens.ConsultingScreen
 import com.example.utttilife.screens.HomeScreen
 import com.example.utttilife.screens.IcomeScreen
 import com.example.utttilife.screens.RecipesScreen
+import com.example.utttilife.screens.RegisterApartamentScreen
 
 @Composable
 fun AppNavigation() {
@@ -62,6 +63,9 @@ fun AppNavigation() {
             }
             composable(route = Screens.RecipesScreen.name){
                 RecipesScreen()
+            }
+            composable(route = Screens.RegisterApartament.name){
+                RegisterApartamentScreen()
             }
             composable(route = Screens.IcomeScreen.name){
                 IcomeScreen()

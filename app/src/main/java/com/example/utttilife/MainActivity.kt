@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.utttilife.screens.LoginScreen
-import com.example.utttilife.screens.RegisterApartamentScreen
 import com.example.utttilife.ui.theme.UtttilifeTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,9 +23,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //LoginScreen()
+                    LoginScreen()
 
-                    RegisterApartamentScreen()
+                   // RegisterApartamentScreen()
                 }
             }
         }

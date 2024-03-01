@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.utttilife.components.RegisterApartamentComponents.RegisterApartamentComponents
+import com.example.utttilife.components.friend.ChatViewModel
 
 @Preview
 @Composable
-fun RegisterApartamentScreen() {
+fun RegisterApartamentScreen(viewModel: ChatViewModel = viewModel()) {
 
 
     val backgrondColor = Color(0x00FFFFFF)
