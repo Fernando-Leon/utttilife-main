@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.utttilife.navigation.AppNavigation
 import com.example.utttilife.screens.LoginScreen
+import com.example.utttilife.screens.MainScreen
 import com.example.utttilife.ui.theme.UtttilifeTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +43,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                    //LoginScreen()
+                    MainScreen()
                 }
             }
         }
@@ -53,7 +55,8 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 fun GreetingPreview() {
     UtttilifeTheme {
-        LoginScreen()
+        //LoginScreen()
         //RegisterAartamentScreen()
+        MainScreen()
     }
 }
