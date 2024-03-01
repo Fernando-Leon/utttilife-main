@@ -138,19 +138,13 @@ fun RegisterApartamentComponents(){
     Spacer(modifier = Modifier.height(16.dp))
 
     Row(
-        modifier = Modifier.height(140.dp). width(140.dp),
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center // Alinea los elementos horizontalmente
     ) {
         Button(
             onClick = { /* TODO: Implement registration logic */ },
-            modifier = Modifier.weight(1f),
-            shape = buttonShape,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = buttonColor,
-                contentColor = Color.White
-            )
         ) {
-            Text("Registrar\n Vivienda")
+            Text(text = "Registrar Vivienda")
         }
 
         Spacer(modifier = Modifier.width(8.dp))
