@@ -41,6 +41,9 @@ package com.example.utttilife.screens
                         },
                         onRegisterClicked = {
                             navController.navigate("register")
+                            {
+                                popUpTo("login") { inclusive = true }
+                            }
                         }
                     )
                 }

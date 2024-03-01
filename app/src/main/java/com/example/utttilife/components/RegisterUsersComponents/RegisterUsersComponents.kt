@@ -1,5 +1,6 @@
 package com.example.utttilife.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -38,7 +39,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 
 @Composable
-fun RegisterComponent(onReisterSuccess: () -> Unit) {
+fun RegisterComponent(onReisterSuccess: () -> Unit, onLoginSucess: () -> Unit) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -208,6 +209,7 @@ fun RegisterComponent(onReisterSuccess: () -> Unit) {
                             onReisterSuccess()
 
 
+
                             // Muestra el Snackbar de éxito
                             snackbarHostState.showSnackbar(
                                 message = "Usuario registrado con éxito :)",
@@ -235,7 +237,19 @@ fun RegisterComponent(onReisterSuccess: () -> Unit) {
         ) {
             Text("Registrarme")
         }
+        OutlinedButton(
 
+            onClick = {onLoginSucess()},
+                    modifier = Modifier.weight(1f),
+            shape = buttonShape,
+            colors = ButtonDefaults.outlinedButtonColors(
+                containerColor = Color.Transparent,
+                contentColor = MaterialTheme.colorScheme.primary
+            ),
+            border = BorderStroke(1.dp, buttonColor)
+        ) {
+            Text("Iniciar Sesión")
+        }
 
     }
     Spacer(modifier = Modifier.width(8.dp))
