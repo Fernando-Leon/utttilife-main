@@ -1,6 +1,7 @@
 package com.example.utttilife.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -14,6 +15,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +33,8 @@ import kotlinx.coroutines.launch
 import androidx.compose.material3.SnackbarDuration
 
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun RegisterComponent(
@@ -39,15 +44,7 @@ fun RegisterComponent(
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
-
-
     val scope = rememberCoroutineScope()
-
-    val buttonColor =
-        Color(0xFF02A787) // Color del botón 'Registrarme' y del borde del botón 'Iniciar Sesión'
-    val textColorButton = Color(0xFFF4F7F6)
-    val buttonShape = RoundedCornerShape(4.dp) // Forma redondeada para el borde y el botón
-    val backgrondColor = Color(0x00FFFFFF)
 
     val textValueUser = remember { mutableStateOf("") }
     val textValueName = remember { mutableStateOf("") }
@@ -57,82 +54,69 @@ fun RegisterComponent(
     val textValuePhoneNumber = remember { mutableStateOf("") }
     val checkedState = remember { mutableStateOf(false) }
 
-    Spacer(modifier = Modifier.height(56.dp))
-    Text("Registro", style = MaterialTheme.typography.headlineLarge)
-    Spacer(modifier = Modifier.height(36.dp))
+    Spacer(modifier = Modifier.height(30.dp))
+    Text(
+        text = "Registro",
+        fontSize = 30.sp,
+        fontWeight = FontWeight.Black,
+        color = MaterialTheme.colorScheme.primary
+   )
+    Spacer(modifier = Modifier.height(30.dp))
 
 // Campo de texto para el nombre de usuario
-    TextField(
+    OutlinedTextField(
         value = textValueUser.value,
         onValueChange = { textValueUser.value = it },
-        placeholder = { Text("Crea un nombre de usuario") },
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp))
+        label = { Text(text = "Nombre usuario") },
+        modifier = Modifier.fillMaxWidth()
     )
     Spacer(modifier = Modifier.height(16.dp))
 
 // Campo de texto para el nombre
-    TextField(
+    OutlinedTextField(
         value = textValueName.value,
         onValueChange = { textValueName.value = it },
-        placeholder = { Text("Nombre Completo") },
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp))
+        label = { Text(text = "Nombre completo") },
+        modifier = Modifier.fillMaxWidth()
     )
     Spacer(modifier = Modifier.height(16.dp))
 
 // Campo de texto para el correo electrónico
-    TextField(
+    OutlinedTextField(
         value = textValueEmail.value,
         onValueChange = { textValueEmail.value = it },
-        placeholder = { Text("Correo Electronico") },
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp))
+        label = { Text(text = "Correo electronico") },
+        modifier = Modifier.fillMaxWidth()
     )
 
     Spacer(modifier = Modifier.height(16.dp))
 
+    // Campo de texto para el número de teléfono
+    OutlinedTextField(
+        value = textValuePhoneNumber.value,
+        onValueChange = { textValuePhoneNumber.value = it },
+        label = { Text(text = "Numero telefonico") },
+        modifier = Modifier.fillMaxWidth()
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+
 // Campo de texto para la contraseña
-    TextField(
+    OutlinedTextField(
         value = textValuePassword.value,
         onValueChange = { textValuePassword.value = it },
-        placeholder = { Text("Contraseña") },
+        label = { Text(text = "Contraseña") },
+        modifier = Modifier.fillMaxWidth(),
         visualTransformation = PasswordVisualTransformation(),
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp)),
     )
     Spacer(modifier = Modifier.height(16.dp))
 
 // Campo de texto para repetir la contraseña
-    TextField(
+    OutlinedTextField(
         value = textValuePasswordRepeat.value,
         onValueChange = { textValuePasswordRepeat.value = it },
-        placeholder = { Text("Repite la Contraseña") },
         visualTransformation = PasswordVisualTransformation(),
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp)),
-    )
-    Spacer(modifier = Modifier.height(16.dp))
-
-// Campo de texto para el número de teléfono
-    TextField(
-        value = textValuePhoneNumber.value,
-        onValueChange = { textValuePhoneNumber.value = it },
-        placeholder = { Text("Numero de telefono") },
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(15.dp))
-            .border(2.dp, Color.Black, shape = RoundedCornerShape(15.dp)),
+        label = { Text(text = "Confirmar ontraseña") },
+        modifier = Modifier.fillMaxWidth()
     )
     Spacer(modifier = Modifier.height(16.dp))
 
@@ -229,25 +213,18 @@ fun RegisterComponent(
                 }
             },
             modifier = Modifier.weight(1f),
-            shape = buttonShape,
+            shape = MaterialTheme.shapes.medium,
             colors = ButtonDefaults.buttonColors(
-                containerColor = buttonColor,
-                contentColor = Color.White
+                containerColor = MaterialTheme.colorScheme.primary
             )
         ) {
             Text("Registrarme")
         }
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.width(5.dp))
         OutlinedButton(
-
             onClick = {onLoginSucess()},
                     modifier = Modifier.weight(1f),
-            shape = buttonShape,
-            colors = ButtonDefaults.outlinedButtonColors(
-                containerColor = Color.Transparent,
-                contentColor = MaterialTheme.colorScheme.primary
-            ),
-            border = BorderStroke(1.dp, buttonColor)
+            shape = MaterialTheme.shapes.medium
         ) {
             Text("Iniciar Sesión")
         }
