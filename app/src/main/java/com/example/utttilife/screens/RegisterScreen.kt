@@ -16,33 +16,62 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
 
 
 @Preview
 @Composable
-fun RegisterScreen(){
+fun RegisterScreen() {
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .padding(16.dp)
-                .border(0.dp, Color.White, shape = RoundedCornerShape(10.dp))
-                .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
-        ) {
-            LazyColumn(
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "Register") {
+        composable("Register") {
+            Box(
                 modifier = Modifier
+                    .fillMaxSize()
                     .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
+                contentAlignment = Alignment.Center
             ) {
-                item{ RegisterComponent(onReisterSuccess ={ })}
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .border(0.dp, Color.White, shape = RoundedCornerShape(10.dp))
+                        .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
+                ) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Top
+                    ) {
+                        item {
+                            RegisterComponent(onReisterSuccess = {
+                                navController.navigate("home") {
+                                    popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
+                                }
+                            }, onLoginSucess = {
+                                navController.navigate("login") {
+                                    popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
+                                }
+                            })
+                        }
+                    }
+                }
             }
         }
+        composable("home"){
+            MainScreen()
+        }
+        composable("login"){
+            LoginScreen()
+        }
     }
+
+
 }
+
+
 
