@@ -99,10 +99,7 @@
                     }
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .background( MaterialTheme.colorScheme.primary), // Padding horizontal
-                shape = RoundedCornerShape(10.dp),
 
             ){
                 Text(text = "Obtener Ubicacion", color = Color.White)

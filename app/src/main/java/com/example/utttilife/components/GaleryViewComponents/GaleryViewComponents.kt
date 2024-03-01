@@ -59,7 +59,7 @@ fun GalleryView() {
         Icon(
             painter = painterResource(id = R.drawable.add_photo),
             contentDescription = "Agregar imagen",
-            tint = Color.Blue,
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(30.dp)
         )
     }
