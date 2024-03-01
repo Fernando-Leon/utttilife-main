@@ -10,11 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
@@ -23,23 +22,21 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.utttilife.data.Responses.ResponsesLogin.BodyLoginResponse
 import com.example.utttilife.data.Responses.ResponsesUsers.BodyUserRegisterResponse
-import com.example.utttilife.data.Responses.ResponsesUsers.UsersRegisterResponse
-import com.example.utttilife.data.clients.RetrofitClientLogin
 import com.example.utttilife.data.clients.RetrofitClientUserRegister
 import kotlinx.coroutines.launch
 
 // Importa el componente de Snackbar
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.Text
 
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 
 @Composable
-fun RegisterComponent(onReisterSuccess: () -> Unit, onLoginSucess: () -> Unit) {
+fun RegisterComponent(
+    onReisterSuccess: () -> Unit,
+    onLoginSucess: () -> Unit,
+    onTerminesAndConditioners: () -> Unit
+) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -152,7 +149,10 @@ fun RegisterComponent(onReisterSuccess: () -> Unit, onLoginSucess: () -> Unit) {
             "Aceptar términos y condiciones de servicio",
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
+            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.fillMaxWidth().clickable {
+                onTerminesAndConditioners()
+            }
         )
 
     }
@@ -237,6 +237,7 @@ fun RegisterComponent(onReisterSuccess: () -> Unit, onLoginSucess: () -> Unit) {
         ) {
             Text("Registrarme")
         }
+        Spacer(modifier = Modifier.height(5.dp))
         OutlinedButton(
 
             onClick = {onLoginSucess()},

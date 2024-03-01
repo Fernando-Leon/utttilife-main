@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -48,15 +47,18 @@ fun RegisterScreen() {
                         verticalArrangement = Arrangement.Top
                     ) {
                         item {
-                            RegisterComponent(onReisterSuccess = {
-                                navController.navigate("home") {
-                                    popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
-                                }
-                            }, onLoginSucess = {
-                                navController.navigate("login") {
-                                    popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
-                                }
-                            })
+                            RegisterComponent(
+                                onReisterSuccess = {
+                                    navController.navigate("home") {
+                                        popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
+                                    }
+                                },
+                                onLoginSucess = {
+                                    navController.navigate("login") {
+                                        popUpTo("Register") { inclusive = true } // Esto elimina la pantalla de login del stack de navegación
+                                    }
+                                }, onTerminesAndConditioners = { navController.navigate("termines_and_conditioners") }
+                            )
                         }
                     }
                 }
@@ -67,6 +69,13 @@ fun RegisterScreen() {
         }
         composable("login"){
             LoginScreen()
+        }
+        composable("termines_and_conditioners") {
+            TerminatesAndConditionals(
+                onBackPressed = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 
