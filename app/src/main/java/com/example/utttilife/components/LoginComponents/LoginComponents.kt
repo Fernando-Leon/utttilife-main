@@ -22,8 +22,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.utttilife.Data.Responses.LoginResponse
-import com.example.utttilife.data.clients.RetrofitClient
+import com.example.utttilife.data.Responses.ResponsesLogin.BodyLoginResponse
+import com.example.utttilife.data.clients.RetrofitClientLogin
 import kotlinx.coroutines.launch
 
 
@@ -157,8 +157,8 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                             }
                             scope.launch {
                                 try {
-                                    val loginRequest = LoginResponse(textValueUser.value, textValuePassword.value)
-                                    val userResponse = RetrofitClient.create().validateUser(loginRequest)
+                                    val loginRequest = BodyLoginResponse(textValueUser.value, textValuePassword.value)
+                                    val userResponse = RetrofitClientLogin.create().validateUser(loginRequest)
                                     if (userResponse.exist) {
                                         // El usuario existe, realiza la navegación
                                         onLoginSuccess()
