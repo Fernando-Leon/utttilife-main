@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.utttilife.components.GaleryViewComponents.GalleryView
 import com.example.utttilife.components.GetCordinates.GetCordinatesComponent
 
 
@@ -114,7 +115,7 @@ fun RegisterApartamentComponents(){
     )
     Spacer(modifier = Modifier.height(16  .dp))
 
-
+    GalleryView()
     Spacer(modifier = Modifier.height(16.dp))
 
     Row(
