@@ -33,11 +33,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-fun GreetingPreview() {
-    UtttilifeTheme {
-        //LoginScreen()
-        //RegisterApartamentScreen()
-    }
-}
