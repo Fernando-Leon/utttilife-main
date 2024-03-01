@@ -42,7 +42,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 @Composable
 fun LayoutContent(navController: NavController, viewModel: MainViewModel) {
     //Variable que almacena la respuesta
-    val response = remember { mutableStateOf("Hola") }
+    val response = remember { mutableStateOf("Receta ...") }
 
     Scaffold(
         bottomBar = {
