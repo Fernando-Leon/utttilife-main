@@ -23,18 +23,18 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TerminatesAndConditionals(onBackPressed: () -> Unit) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Política de privacidad") },
-                navigationIcon = {
-                    IconButton(onClick = onBackPressed) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Política de privacidad") },
+                    navigationIcon = {
+                        IconButton(onClick = onBackPressed) {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        }
                     }
-                }
-            )
-        }
-    ) {
+                )
+            }
+        ) {
         Box(
             modifier = Modifier.fillMaxSize().
             padding(top = 65.dp, start = 16.dp, end = 16.dp)

@@ -155,7 +155,7 @@ suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispa
                     ]
                 }
             ],
-            "max_tokens": 800
+            "max_tokens": 3000
         }
     """.trimIndent()
     // Request
