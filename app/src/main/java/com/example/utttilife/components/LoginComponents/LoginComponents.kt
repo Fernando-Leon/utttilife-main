@@ -72,7 +72,8 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                 TextField(
                     value = textValueUser.value,
                     onValueChange = { textValueUser.value=it},
-                    placeholder = { Text("Usuario") },
+                    label = { Text("Nombre de Usuario") },
+                    placeholder = { Text("Ej.Arturo1754") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(15.dp))
@@ -88,7 +89,8 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                 TextField(
                     value = textValuePassword.value,
                     onValueChange = { textValuePassword.value =it},
-                    placeholder = { Text("Contraseña") },
+                    label = { Text("Contraseña") },
+                    placeholder = { Text("**********") },
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier
                         .fillMaxWidth()

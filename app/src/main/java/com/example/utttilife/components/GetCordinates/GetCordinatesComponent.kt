@@ -64,11 +64,13 @@
                     .padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
             ) {
+
                 OutlinedTextField(
                     value = latitudeText.value,
                     onValueChange = { latitudeText.value = it },
                     label = { Text("Latitud") },
-                    modifier = Modifier.weight(.3f)
+                    modifier = Modifier.weight(.4f),
+                    enabled = false
                 )
 
                 Spacer(modifier = Modifier.padding(horizontal = 2.dp))
@@ -77,7 +79,8 @@
                     value = longitudeText.value,
                     onValueChange = { longitudeText.value = it },
                     label = { Text("Longitud") },
-                    modifier = Modifier.weight(.3f)
+                    modifier = Modifier.weight(.4f),
+                    enabled = false
                 )
 
 
@@ -87,7 +90,7 @@
                 onClick = {
                     scope.launch {
                         if (permissionState.status.isGranted) {
-                            val location = withContext(Dispatchers.IO){  getUserLocation(context) }
+                            val location = withContext(Dispatchers.IO) { getUserLocation(context) }
                             if (location != null) {
                                 latitudeText.value = location.latitude.toString()
                                 longitudeText.value = location.longitude.toString()
@@ -95,9 +98,12 @@
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp), // Padding horizontal
-                shape = RoundedCornerShape(10.dp),colors = ButtonDefaults.buttonColors(
-            )
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .background( MaterialTheme.colorScheme.primary), // Padding horizontal
+                shape = RoundedCornerShape(10.dp),
+
             ){
                 Text(text = "Obtener Ubicacion", color = Color.White)
                     }
