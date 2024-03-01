@@ -47,15 +47,13 @@ fun ConsultingScreen(viewModel: ChatViewModel = viewModel()) {
                 item {
                     Spacer(modifier = Modifier.height(5.dp))
                 }
-                items(viewModel.messages) { message ->
-                    MessageView(message = message.text, isUserMessage = message.isUser)
-                }
+
                 item {
                     MessageView(message =  "Hola como estas", isUserMessage = false)
                 }
 
-                item {
-                    MessageView(message = "Muy bien", isUserMessage = true)
+                items(viewModel.messages) { message ->
+                    MessageView(message = message.text, isUserMessage = message.isUser)
                 }
             }
             UserInput(onMessageSent = { viewModel.sendMessage(it) })
