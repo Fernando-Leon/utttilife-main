@@ -46,7 +46,7 @@ fun CardAdd(navController: NavController) {
             ){
                 OutlinedButton(
                     // Navigation to consulting screen
-                    onClick = { navController.navigate(Screens.ConsultingScreen.name) },
+                    onClick = { navController.navigate(Screens.RegisterApartament.name) },
                     modifier = Modifier.align(Alignment.CenterEnd)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
