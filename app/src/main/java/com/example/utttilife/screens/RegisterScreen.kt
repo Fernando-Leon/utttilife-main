@@ -45,7 +45,9 @@ fun RegisterScreen() {
                     TopAppBar(
                         title = {
                             Row(
-                                verticalAlignment = Alignment.CenterVertically
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+
                             ) {
                                 Text(
                                     "UTTT ",
