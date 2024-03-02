@@ -18,9 +18,6 @@ import com.example.utttilife.components.friend.ChatViewModel
 import com.example.utttilife.components.friend.MessageView
 import com.example.utttilife.components.friend.UserInput
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.utttilife.components.friend.MessageFriend
-import com.example.utttilife.components.friend.MessageUser
-
 
 @Composable
 fun ConsultingScreen(viewModel: ChatViewModel = viewModel()) {

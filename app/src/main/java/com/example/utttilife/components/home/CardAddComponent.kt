@@ -1,5 +1,6 @@
 package com.example.utttilife.components.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,8 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -30,15 +33,29 @@ fun CardAdd(navController: NavController) {
             .shadow(4.dp, RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))
             .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp)
     ){
-        Column {
+        Image(
+            painter = painterResource(id = R.drawable.house_isometric),
+            contentDescription = null,
+            modifier = Modifier
+                .matchParentSize()
+                .alpha(0.2f),
+            contentScale = ContentScale.Crop
+        )
+        Column(
+            modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
+        ) {
             Text(
                 text = "¿Quieres anunciar",
                 style = MaterialTheme.typography.titleLarge,
             )
             Text(
                 text = "tus departamentos?",
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Text(
+                text = "💸",
                 style = MaterialTheme.typography.titleLarge,
             )
             Box(
