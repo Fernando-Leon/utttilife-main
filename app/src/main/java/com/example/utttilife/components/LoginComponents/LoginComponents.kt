@@ -32,14 +32,6 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
 
     val scope = rememberCoroutineScope()
 
-
-    val buttonColor = Color(0xFF02A787) // Color del botón 'Registrarme' y del borde del botón 'Iniciar Sesión'
-    val buttonShape = RoundedCornerShape(4.dp) // Forma redondeada para el borde y el botón
-    val backgrondColor = Color(0x40FFFFFF)
-    val textFielColor = Color(0xABFFFFFF)
-    val textBienvenidosColor= Color(0xFF3F3E3E)
-
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -50,8 +42,7 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
             modifier = Modifier
                 .padding(16.dp)
                 .border(2.dp, Color.White, shape = RoundedCornerShape(10.dp))
-                .background(backgrondColor, RoundedCornerShape(10.dp))
-
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f), RoundedCornerShape(10.dp))
 
             ) {
             Column(
@@ -61,32 +52,28 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                 verticalArrangement = Arrangement.Top
             ) {
 
-                Spacer(modifier = Modifier.height(56.dp))
-                Text("Bienvenido", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), color=textBienvenidosColor)
+                Spacer(modifier = Modifier.height(30.dp))
+                Text("Bienvenido", style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold), color=MaterialTheme.colorScheme.primary)
                 Spacer(modifier = Modifier.height(1.dp))
-                Text("Inicio de sesion", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), color=Color.White)
-                Spacer(modifier = Modifier.height(36.dp))
+                Text("Inicio de sesion", style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold), color= MaterialTheme.colorScheme.onSurface)
+                Spacer(modifier = Modifier.height(30.dp))
                 val textValueUser= remember{
                     mutableStateOf("")
                 }
-                TextField(
+                OutlinedTextField(
                     value = textValueUser.value,
                     onValueChange = { textValueUser.value=it},
                     label = { Text("Nombre de Usuario") },
                     placeholder = { Text("Ej.Arturo1754") },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(15.dp))
-                        .background(textFielColor)
-                        .border(2.dp, Color.White, shape = RoundedCornerShape(15.dp)),
-
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
                 val textValuePassword = remember{
                     mutableStateOf("")
                 }
-                TextField(
+                OutlinedTextField(
                     value = textValuePassword.value,
                     onValueChange = { textValuePassword.value =it},
                     label = { Text("Contraseña") },
@@ -94,25 +81,16 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(15.dp))
-                        .background(textFielColor)
-                        .border(2.dp, Color.White, shape = RoundedCornerShape(15.dp)),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Text("No tienes un perfil?, crea uno, solo te llevara un instante", color=MaterialTheme.colorScheme.primary, textAlign = TextAlign.Center, style =
+                Text("¿No tienes un perfil?", color=MaterialTheme.colorScheme.primary, textAlign = TextAlign.Center, style =
                 MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold))
-                Spacer(modifier = Modifier.height(16.dp))
+                Text("Crea uno, solo te llevara un instante", color=MaterialTheme.colorScheme.primary, textAlign = TextAlign.Center, style =
+                MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Spacer(modifier = Modifier.height(30.dp))
 
-                    Text("", color=MaterialTheme.colorScheme.primary, textAlign = TextAlign.Center, style =
-                    MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold))
-                }
-                Spacer(modifier = Modifier.height(16.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly // Alinea los elementos horizontalmente
@@ -120,11 +98,7 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                     Button(
                         onClick = { onRegisterClicked() }, // Llama al callback cuando se hace clic en el botón
                         modifier = Modifier.weight(1f),
-                        shape = buttonShape,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = buttonColor,
-                            contentColor = Color.White
-                        )
+                        shape = MaterialTheme.shapes.medium
                     ) {
                         Text("Registrarme")
                     }
@@ -158,16 +132,13 @@ fun LoginComponents(onLoginSuccess: () -> Unit,onRegisterClicked: () -> Unit) {
                             }
                         },
                         modifier = Modifier.weight(1f),
-                        shape = buttonShape,
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            containerColor = Color.Transparent,
-                            contentColor = MaterialTheme.colorScheme.primary
-                        ),
-                        border = BorderStroke(1.dp, buttonColor)
+                        shape = MaterialTheme.shapes.medium
                     ) {
                         Text("Iniciar Sesión")
                     }
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
