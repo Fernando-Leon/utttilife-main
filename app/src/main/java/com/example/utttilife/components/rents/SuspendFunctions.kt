@@ -3,11 +3,16 @@ package com.example.utttilife.components.rents
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import androidx.core.content.ContextCompat
 import com.example.utttilife.data.clients.DirectionsClient
+import com.example.utttilife.data.services.BuildingsApiService
 import com.example.utttilife.data.services.DirectionsApiService
 import com.example.utttilife.models.RouteResponse
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,40 +57,55 @@ suspend fun getRoute(origin: String, destination: String): RouteResponse {
     }
 }
 
-suspend fun getUserLocation(context: Context): android.location.Location? {
-    // Obtiene una instancia del proveedor de servicios de ubicación
+suspend fun getCurrentLocation(context: Context): Location? {
     val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-    // Obtiene una instancia del administrador de ubicación del sistema
     val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    // Verifica si el GPS está habilitado
-    val isGPSEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) || locationManager.isProviderEnabled(
-        LocationManager.GPS_PROVIDER)
-
-    // Si el GPS no está habilitado, devuelve null
+    val isGPSEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) || locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     if (!isGPSEnabled) {
         return null
     }
 
-    // Verifica si se otorgó el permiso necesario para acceder a la ubicación precisa del dispositivo
     if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         return null
     }
 
-    // Se suspende la función hasta que se obtenga la ubicación del usuario
     return suspendCancellableCoroutine { cont ->
-        // Se utiliza el método lastLocation del proveedor de servicios de ubicación fusionada para obtener la última ubicación conocida
-        fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-            // Verifica si la tarea se completó con éxito
-            if (task.isSuccessful) {
-                // Obtiene la ubicación del usuario del resultado de la tarea
-                val androidLocation = task.result
-                // Se reanuda la corrutina con la ubicación obtenida
-                cont.resume(androidLocation)
-            } else {
-                // Si la tarea no se completó con éxito, se reanuda la corrutina con null
-                cont.resume(null)
+        val locationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            interval = 10000
+            fastestInterval = 5000
+        }
+
+        val locationCallback = object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                // Se detienen las actualizaciones de ubicación para evitar múltiples llamadas
+                fusedLocationProviderClient.removeLocationUpdates(this)
+                // Se reanuda la corrutina con la ubicación actual (la más reciente de la lista)
+                cont.resume(result.lastLocation)
             }
         }
+
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+}
+
+suspend fun obtainMarkers(service: BuildingsApiService): List<MapMarker> {
+    val response = service.getBuildings()
+    return if (response.isSuccessful) {
+        val buildingsList = response.body() ?: emptyList()
+        buildingsList.map { building ->
+            MapMarker(
+                id = building._id,
+                coordinates = listOf(building.coordinates[0], building.coordinates[1]),
+                name = building.name,
+                address = building.address,
+                opinions = building.opinions,
+                tenant = building.tenant
+            )
+        }
+    } else {
+        println("Occurred an error during the API call")
+        emptyList()
     }
 }
