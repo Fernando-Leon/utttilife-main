@@ -1,6 +1,7 @@
 package com.example.utttilife.screens
 
 import android.net.Uri
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +25,7 @@ import androidx.navigation.NavHostController
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -114,6 +116,7 @@ fun DepartmentDetailsScreen(
     }
 }
 
+//Carrusel de imagenes
 @Composable
 fun ImageCarousel(imageUrls: List<String>) {
     LazyRow(
@@ -125,7 +128,8 @@ fun ImageCarousel(imageUrls: List<String>) {
                 modifier = Modifier
                     .shadow(4.dp, RoundedCornerShape(10.dp))
                     .clip(RoundedCornerShape(10.dp))
-                    .background(Color.White)
+                    .border(BorderStroke(1.dp, MaterialTheme.colorScheme.primary), RoundedCornerShape(10.dp))
+                    .background(color = MaterialTheme.colorScheme.secondary)
             ) {
                 Image(
                     painter = rememberAsyncImagePainter(
@@ -138,7 +142,7 @@ fun ImageCarousel(imageUrls: List<String>) {
                     contentDescription = null,
                     modifier = Modifier
                         .size(200.dp)
-                        .clip(RoundedCornerShape(10.dp)), // Aplica un recorte con bordes redondeados a la imagen
+                        .clip(RoundedCornerShape(10.dp)),
                     contentScale = ContentScale.Crop
                 )
             }

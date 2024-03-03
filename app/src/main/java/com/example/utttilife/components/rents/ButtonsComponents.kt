@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +41,7 @@ fun OptionButtons(onDirectionsClick: () -> Unit){
             name = "Departamentos",  // Nombre del botón
             painterResource = painterResource(id = drawable.home_work),  // Icono del botón
             backColor = Color.Transparent,  // Color de fondo transparente
-            color = Color.Blue  // Color del texto del botón
+            color = MaterialTheme.colorScheme.secondary  // Color del texto del botón
         ) {
             BottomSheetRouter.navigateTo(Screen.BottomSheetDepartmentScreen)  // Navega a la pantalla de departamentos
         }
@@ -50,7 +51,7 @@ fun OptionButtons(onDirectionsClick: () -> Unit){
             name = "Opiniones",  // Nombre del botón
             painterResource = painterResource(id = drawable.reviews),  // Icono del botón
             backColor = Color.Transparent,  // Color de fondo transparente
-            color = Color.Blue  // Color del texto del botón
+            color = MaterialTheme.colorScheme.secondary  // Color del texto del botón
         ) {
             BottomSheetRouter.navigateTo(Screen.BottomSheetReviewsScreen)  // Navega a la pantalla de opiniones
         }
@@ -60,7 +61,7 @@ fun OptionButtons(onDirectionsClick: () -> Unit){
             name = "Como llegar",  // Nombre del botón
             painterResource = painterResource(id = drawable.map),  // Icono del botón
             backColor = Color.Transparent,  // Color de fondo transparente
-            color = Color.Blue  // Color del texto del botón
+            color = MaterialTheme.colorScheme.secondary  // Color del texto del botón
         ) {
             onDirectionsClick()  // Ejecuta la acción de "Cómo llegar" proporcionada por el parámetro
         }
@@ -78,12 +79,13 @@ fun GenericOutlinedButton(
 ){
     // Botón con borde delgado y esquinas redondeadas
     OutlinedButton(
-        border = BorderStroke(1.dp, Color.Blue),  // Borde del botón
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),  // Borde del botón
         shape = RoundedCornerShape(50),  // Forma redondeada para las esquinas
         onClick = onClick,  // Acción de clic del botón
         colors = ButtonDefaults.buttonColors(  // Colores personalizados para el botón
             contentColor = color,  // Color del texto del botón
             containerColor = backColor  // Color de fondo del botón
+
         ),
     ) {
         // Icono del botón

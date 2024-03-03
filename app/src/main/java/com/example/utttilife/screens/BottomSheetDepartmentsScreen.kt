@@ -1,6 +1,7 @@
 package com.example.utttilife.screens
 
 import android.net.Uri
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -102,8 +104,9 @@ fun CardApartments(navController: NavHostController, type: String, description: 
                 }
             }
             Column(modifier = Modifier.fillMaxWidth(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                OutlinedButton(onClick = {
-                    navController.navigate("departmentDetails/$typeEncoded/$descriptionEncoded/$costEncoded/$rulesEncoded/$encodedListJsonString")
+                OutlinedButton(
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+                    onClick = { navController.navigate("departmentDetails/$typeEncoded/$descriptionEncoded/$costEncoded/$rulesEncoded/$encodedListJsonString")
                 }) {
                     Icon(painterResource(id = drawable.read_more), contentDescription = "")
                     Spacer(modifier = Modifier.width(5.dp))
