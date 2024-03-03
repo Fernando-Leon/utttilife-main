@@ -37,7 +37,7 @@ import androidx.navigation.compose.NavHost
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen() {
-    val backgroundImage: Painter = painterResource(id = R.drawable.fondo)
+    val backgroundImage: Painter = painterResource(id = R.drawable.background_login)
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
