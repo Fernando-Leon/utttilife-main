@@ -91,4 +91,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.1.0")
     implementation("org.chromium.net:cronet-embedded:119.6045.31")
 
+    //Dependencia para el chat bot
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+
 }

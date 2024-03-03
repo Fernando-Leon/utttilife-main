@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.example.utttilife.R
 
 
+// Change type user (chatbot or user)
 @Composable
 fun MessageView(message: String, isUserMessage: Boolean) {
     if(isUserMessage){
@@ -35,6 +36,7 @@ fun MessageView(message: String, isUserMessage: Boolean) {
 }
 
 
+// Component to chatbot message
 @Composable
 fun MessageFriend(message : String) {
     Column (
@@ -45,7 +47,7 @@ fun MessageFriend(message : String) {
                 .shadow(4.dp, RoundedCornerShape(10.dp))
                 .clip(RoundedCornerShape(10.dp))
                 .width(240.dp)
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -60,7 +62,8 @@ fun MessageFriend(message : String) {
             ) {
                 Text(
                     text = message,
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -68,6 +71,7 @@ fun MessageFriend(message : String) {
     }
 }
 
+// Component to message user
 @Composable
 fun MessageUser(message: String) {
 
@@ -80,7 +84,7 @@ fun MessageUser(message: String) {
                 .shadow(4.dp, RoundedCornerShape(10.dp))
                 .clip(RoundedCornerShape(10.dp))
                 .width(240.dp)
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -88,7 +92,7 @@ fun MessageUser(message: String) {
                 painter = painterResource(id = R.drawable.acount_icon),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
-                tint = MaterialTheme.colorScheme.surfaceVariant,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Spacer(modifier = Modifier.width(3.dp))
             Box (
@@ -96,7 +100,8 @@ fun MessageUser(message: String) {
             ) {
                 Text(
                     text = message,
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }

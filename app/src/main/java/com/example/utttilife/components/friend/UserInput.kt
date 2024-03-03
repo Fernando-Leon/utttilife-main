@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -23,20 +22,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 
+
+// Component to send message
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserInput(onMessageSent: (String) -> Unit) {
     var text by remember { mutableStateOf("") }
 
-    // Definir una altura común para TextField y Button
-    val commonHeight = 50.dp // Puedes ajustar este valor según tus necesidades
+    val commonHeight = 55.dp
 
     Row(
         modifier = Modifier
@@ -47,12 +44,12 @@ fun UserInput(onMessageSent: (String) -> Unit) {
         Box(modifier = Modifier
             .weight(1f)
             .fillMaxWidth()
-            .height(commonHeight)) { // Aplicar la altura común aquí
+            .height(commonHeight)) {
             TextField(
                 value = text,
                 onValueChange = { text = it },
                 modifier = Modifier
-                    .fillMaxHeight() // Asegura que el TextField llene el Box
+                    .fillMaxHeight()
                     .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(50.dp)),
                 shape = RoundedCornerShape(50.dp),
                 colors = TextFieldDefaults.textFieldColors(
@@ -71,7 +68,7 @@ fun UserInput(onMessageSent: (String) -> Unit) {
                 onMessageSent(text)
                 text = ""
             },
-            modifier = Modifier.height(commonHeight) // Aplicar la misma altura común al Button
+            modifier = Modifier.height(commonHeight)
         ) {
             Text("Enviar")
         }
