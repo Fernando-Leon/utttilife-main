@@ -90,6 +90,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.1.0")
     implementation("org.chromium.net:cronet-embedded:119.6045.31")
+    implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation("com.google.android.gms:play-services-maps:x.y.z")
+    implementation("com.cloudinary:cloudinary-android:2.6.1")
 
     //Dependencia para el chat bot
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")

@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.utttilife.R
+import com.example.utttilife.R.*
 import com.example.utttilife.navigation.BottomSheetRouter
 import com.example.utttilife.navigation.Screen
 
@@ -38,7 +38,7 @@ fun OptionButtons(onDirectionsClick: () -> Unit){
         // Botón genérico para mostrar los departamentos
         GenericOutlinedButton(
             name = "Departamentos",  // Nombre del botón
-            painterResource = painterResource(id = R.drawable.home_work),  // Icono del botón
+            painterResource = painterResource(id = drawable.home_work),  // Icono del botón
             backColor = Color.Transparent,  // Color de fondo transparente
             color = Color.Blue  // Color del texto del botón
         ) {
@@ -48,7 +48,7 @@ fun OptionButtons(onDirectionsClick: () -> Unit){
         // Botón genérico para mostrar las opiniones
         GenericOutlinedButton(
             name = "Opiniones",  // Nombre del botón
-            painterResource = painterResource(id = R.drawable.reviews),  // Icono del botón
+            painterResource = painterResource(id = drawable.reviews),  // Icono del botón
             backColor = Color.Transparent,  // Color de fondo transparente
             color = Color.Blue  // Color del texto del botón
         ) {
@@ -58,7 +58,7 @@ fun OptionButtons(onDirectionsClick: () -> Unit){
         // Botón genérico para la función "Cómo llegar"
         GenericOutlinedButton(
             name = "Como llegar",  // Nombre del botón
-            painterResource = painterResource(id = R.drawable.map),  // Icono del botón
+            painterResource = painterResource(id = drawable.map),  // Icono del botón
             backColor = Color.Transparent,  // Color de fondo transparente
             color = Color.Blue  // Color del texto del botón
         ) {

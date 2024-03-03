@@ -48,9 +48,9 @@ fun MapBox(
             // Recorrer la lista de marcadores y colocarlos en el mapa
             markers.forEach { marker ->
                 Marker(
-                    state = MarkerState(position = marker.position),  // Estado del marcador con la posición especificada
-                    title = marker.title,  // Título del marcador
-                    snippet = marker.snippet,  // Texto descriptivo del marcador
+                    state = MarkerState(position = LatLng(marker.coordinates[0],marker.coordinates[1])),  // Estado del marcador con la posición especificada
+                    title = marker.name,  // Título del marcador
+                    snippet = marker.address,  // Texto descriptivo del marcador
                     onClick = {
                         onMarkerClick(marker)  // Llama a la función de devolución de llamada cuando se hace clic en el marcador
                         true  // Indica que se ha manejado el clic en el marcador
