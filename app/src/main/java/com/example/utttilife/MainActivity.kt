@@ -25,8 +25,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //LoginScreen()
-                    MainScreen()
+                    LoginScreen()
+                // MainScreen()
                     //RegisterApartamentScreen()
                 }
             }

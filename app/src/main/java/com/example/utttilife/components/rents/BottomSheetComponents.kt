@@ -22,7 +22,7 @@ import com.example.utttilife.screens.DepartmentsView
 import com.example.utttilife.screens.ReviewsView
 
 @Composable
-fun DetailsDepartment(navController: NavHostController, coordinates: List<Double>, name: String, address: String, opinions: List<Opinion>, tenant: Tenant, onDirectionsClick: () -> Unit){
+fun DetailsDepartment(navController: NavHostController, id: String, coordinates: List<Double>, name: String, address: String, opinions: List<Opinion>, tenant: Tenant, onDirectionsClick: () -> Unit){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -61,7 +61,7 @@ fun DetailsDepartment(navController: NavHostController, coordinates: List<Double
                     DepartmentsView(navController, coordinates)  // Vista de departamentos
                 }
                 is Screen.BottomSheetReviewsScreen -> {
-                    ReviewsView(opinions)  // Vista de reseñas
+                    ReviewsView(id, opinions)  // Vista de reseñas
                 }
             }
         }
