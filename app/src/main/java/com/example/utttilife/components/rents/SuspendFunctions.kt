@@ -91,21 +91,26 @@ suspend fun getCurrentLocation(context: Context): Location? {
 }
 
 suspend fun obtainMarkers(service: BuildingsApiService): List<MapMarker> {
-    val response = service.getBuildings()
-    return if (response.isSuccessful) {
-        val buildingsList = response.body() ?: emptyList()
-        buildingsList.map { building ->
-            MapMarker(
-                id = building._id,
-                coordinates = listOf(building.coordinates[0], building.coordinates[1]),
-                name = building.name,
-                address = building.address,
-                opinions = building.opinions,
-                tenant = building.tenant
-            )
+    try {
+        val response = service.getBuildings()
+        return if (response.isSuccessful) {
+            val buildingsList = response.body() ?: emptyList()
+            buildingsList.map { building ->
+                MapMarker(
+                    id = building._id,
+                    coordinates = listOf(building.coordinates[0], building.coordinates[1]),
+                    name = building.name,
+                    address = building.address,
+                    opinions = building.opinions,
+                    tenant = building.tenant
+                )
+            }
+        } else {
+            println("Occurred an error during the API call: ${response.errorBody()?.string()}")
+            emptyList()
         }
-    } else {
-        println("Occurred an error during the API call")
-        emptyList()
+    } catch (e: Exception) {
+        println("An exception occurred: ${e.localizedMessage}")
+        return emptyList()
     }
 }

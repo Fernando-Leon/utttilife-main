@@ -145,7 +145,9 @@ fun Map(navController: NavHostController) {
     } else {
         // Componente MapBox que contiene el mapa
         markers?.let {
-            Column {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 SearchBar(searchText = searchText, onSearch = { query ->
                     // Buscar el marcador por nombre
                     foundMarker = markers?.find { it.name.contains(query, ignoreCase = true) }
