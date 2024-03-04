@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
+import com.example.utttilife.components.indicators.IndeterminateCircularIndicator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.Call
@@ -65,7 +66,7 @@ fun ContentScroll(
 fun ObtainedResponse(response: String){
     Box(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 24.dp)
             .fillMaxWidth()
             .shadow(4.dp, RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))

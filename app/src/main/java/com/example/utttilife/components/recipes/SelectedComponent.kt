@@ -7,8 +7,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -41,13 +44,20 @@ fun ImageSelector(selectedImage: MutableState<Bitmap?>) {
         // Refresh value image with selected image
         selectedImage.value = uri?.let { decodeUri(contentResolver, it) }
     }
-    IconButton(onClick = { galleryLauncher.launch("image/*") }) {
-        Icon(
-            painter = painterResource(id = R.drawable.add_image),
-            tint = MaterialTheme.colorScheme.onTertiaryContainer,
-            contentDescription = "Agregar imagen",
-            modifier = Modifier.size(24.dp)
-        )
+    Column(
+        modifier = Modifier.fillMaxHeight(),
+        verticalArrangement = Arrangement.Center
+    ) {
+        IconButton(
+            onClick = { galleryLauncher.launch("image/*") }
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.add_image),
+                tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                contentDescription = "Agregar imagen",
+                modifier = Modifier.size(24.dp)
+            )
+        }
     }
 }
 
