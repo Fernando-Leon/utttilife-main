@@ -135,21 +135,26 @@ fun CardApartments(navController: NavHostController, type: String, description: 
 suspend fun obtainApartments(coordinates: List<Double>): List<Apartments> {
     val request = ApartmentsRequest(coordinates)
     val service = ApartmentsClient.makeApartmentsService().create(ApartmentsApiService::class.java)
-    val response = service.getApartmentsCoordinates(request = request)
-    return if (response.isSuccessful) {
-        val apartmentsList = response.body() ?: emptyList()
-        apartmentsList.map { apartment ->
-            Apartments(
-                type = apartment.type,
-                description = apartment.description,
-                cost = apartment.cost,
-                rules = apartment.rules,
-                imageUrl = apartment.imageUrl
-            )
+    try {
+        val response = service.getApartmentsCoordinates(request = request)
+        return if (response.isSuccessful) {
+            val apartmentsList = response.body() ?: emptyList()
+            apartmentsList.map { apartment ->
+                Apartments(
+                    type = apartment.type,
+                    description = apartment.description,
+                    cost = apartment.cost,
+                    rules = apartment.rules,
+                    imageUrl = apartment.imageUrl
+                )
+            }
+        } else {
+            println("Erro durante la llamada a la API: ${response.errorBody()?.string()}")
+            emptyList()
         }
-    } else {
-        println("Occurred an error during the API call")
-        emptyList()
+    } catch (e: Exception) {
+        println("Exception occurred during the API call: ${e.message}")
+        return emptyList()
     }
 }
 
