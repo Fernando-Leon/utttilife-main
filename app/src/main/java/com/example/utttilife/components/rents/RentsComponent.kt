@@ -1,18 +1,35 @@
 package com.example.utttilife.components.rents
 
 import android.Manifest
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import kotlinx.coroutines.delay
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.utttilife.models.RouteResponse
 import com.example.utttilife.R.*
@@ -63,7 +80,7 @@ fun Map(navController: NavHostController) {
     val mapStyleJson = remember {
         context.resources.openRawResource(raw.map_style).bufferedReader().use { it.readText() }
     }
-
+    var isLoading by remember { mutableStateOf(true) }
     val service = BuildingsClient.makeBuildingsService()
 
     // Estado de los permisos de ubicación
@@ -73,10 +90,11 @@ fun Map(navController: NavHostController) {
     LaunchedEffect(Unit){
         permissionState.launchPermissionRequest()
     }
-
-    LaunchedEffect(Unit){
+    // Hacer solicitud a la api para obtener marcadores
+    LaunchedEffect(Unit) {
         val fetchedMarkers = obtainMarkers(service.create(BuildingsApiService::class.java))
         markers = fetchedMarkers
+        isLoading = false
     }
 
     // Obtener la ubicación del usuario solo si se tiene el permiso
@@ -104,28 +122,52 @@ fun Map(navController: NavHostController) {
         }
     }
 
-    // Componente MapBox que contiene el mapa
-    markers?.let {
-        Column {
-            SearchBar(searchText = searchText, onSearch = { query ->
-                // Buscar el marcador por nombre
-                foundMarker = markers?.find { it.name.contains(query, ignoreCase = true) }
-                // Si se encuentra un marcador, actualiza la posición de la cámara
-                foundMarker?.let { marker ->
-                    cameraPositionState.position = CameraPosition.fromLatLngZoom(LatLng(marker.coordinates[0],marker.coordinates[1]), 16f)
-                }
-            })
-            MapBox(
-                markers = it,
-                cameraPositionState = cameraPositionState,
-                mapStyleJson = mapStyleJson,
-                poly = poly,
-                onMarkerClick = { marker ->
-                    selectedMarker = marker
-                    showBottomSheet = true
-                    poly = null
-                }
-            )
+    if (isLoading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.align(Alignment.Center)
+            ) {
+                Image(
+                    painter = painterResource(id = drawable.house_isometric),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(300.dp)
+                        .clip(RoundedCornerShape(10.dp)),
+                    contentScale = ContentScale.Crop
+                )
+                AnimatedSearchingText()
+            }
+        }
+    } else {
+        // Componente MapBox que contiene el mapa
+        markers?.let {
+            Column {
+                SearchBar(searchText = searchText, onSearch = { query ->
+                    // Buscar el marcador por nombre
+                    foundMarker = markers?.find { it.name.contains(query, ignoreCase = true) }
+                    // Si se encuentra un marcador, actualiza la posición de la cámara
+                    foundMarker?.let { marker ->
+                        cameraPositionState.position = CameraPosition.fromLatLngZoom(LatLng(marker.coordinates[0],marker.coordinates[1]), 16f)
+                    }
+                })
+                MapBox(
+                    markers = it,
+                    cameraPositionState = cameraPositionState,
+                    mapStyleJson = mapStyleJson,
+                    poly = poly,
+                    onMarkerClick = { marker ->
+                        selectedMarker = marker
+                        showBottomSheet = true
+                        poly = null
+                    }
+                )
+            }
+        } ?: run {
+            Text("No se encontraron marcadores, Intente de nuevo mas tarde")
         }
     }
 
@@ -136,10 +178,28 @@ fun Map(navController: NavHostController) {
             onDismissRequest = { showBottomSheet = false }
         ) {
             selectedMarker?.let {
-                DetailsDepartment(navController, coordinates = it.coordinates, name = it.name, address = it.address, opinions = it.opinions, tenant = it.tenant) {
+                DetailsDepartment(navController, id = it.id, coordinates = it.coordinates, name = it.name, address = it.address, opinions = it.opinions, tenant = it.tenant) {
                     onDirectionsClick()
                 }
             }
         }
     }
+}
+
+@Composable
+fun AnimatedSearchingText() {
+    val baseText = "Buscando rentas"
+    var dotsCount by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(key1 = true) {
+        while (true) {
+            delay(500L)
+            dotsCount = (dotsCount + 1) % 4
+        }
+    }
+
+    Text(
+        text = "$baseText${".".repeat(dotsCount)}",
+        style = MaterialTheme.typography.titleMedium
+    )
 }
