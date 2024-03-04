@@ -8,6 +8,9 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,7 +35,6 @@ fun Camera(
     modifier: Modifier
 ){
     cameraController.bindToLifecycle(lifeCycle)
-    //Create a view in the component
     AndroidView(modifier = modifier, factory = {context ->
         val previewView = PreviewView(context).apply {
             layoutParams = ViewGroup.LayoutParams(
@@ -49,18 +51,25 @@ fun Camera(
 //Component to open camara
 @Composable
 fun OpenCamera(navController: NavController) {
-    IconButton(
-        onClick = {
-            navController.navigate("camera")
-        }
+
+    Column(
+        modifier = Modifier.fillMaxHeight(),
+        verticalArrangement = Arrangement.Center
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.camera),
-            contentDescription = "Abrir Camara",
-            tint = MaterialTheme.colorScheme.onTertiaryContainer,
-            modifier = Modifier.size(24.dp)
-        )
+        IconButton(
+            onClick = {
+                navController.navigate("camera")
+            }
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.camera),
+                contentDescription = "Abrir Camara",
+                tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier.size(24.dp)
+            )
+        }
     }
+
 }
 
 //Take a picture

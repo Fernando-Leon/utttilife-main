@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun UserInput(onMessageSent: (String) -> Unit) {
     var text by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) } // Estado de carga
 
     val commonHeight = 55.dp
 
@@ -65,9 +66,12 @@ fun UserInput(onMessageSent: (String) -> Unit) {
 
         Button (
             onClick = {
+                isLoading = true // Indicar que se está cargando
                 onMessageSent(text)
                 text = ""
+                isLoading = false // Indicar que la carga ha finalizado
             },
+            enabled = !isLoading, // Deshabilitar el botón cuando isLoading sea true
             modifier = Modifier.height(commonHeight)
         ) {
             Text("Enviar")
