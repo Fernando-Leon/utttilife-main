@@ -1,6 +1,11 @@
-# UTTT ILIFE
 
-![Logo del Proyecto](logo_app.png)
+<div align="center">
+
+<img width="" src="logo_app"  width=160 height=160  align="center">
+
+# Seal
+
+</div>
 
 Breve descripción del proyecto y su propósito.
 
