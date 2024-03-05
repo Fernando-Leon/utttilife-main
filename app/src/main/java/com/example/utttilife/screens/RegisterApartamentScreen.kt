@@ -42,7 +42,7 @@ fun RegisterApartamentScreen(viewModel: ChatViewModel = viewModel()) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             ) {
-                item { RegisterApartamentComponents() }
+                item { RegisterApartamentComponents(onRegistrationSuccess = { }) }
             }
         }
     }
