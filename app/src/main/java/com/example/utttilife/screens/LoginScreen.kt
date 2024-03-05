@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -33,12 +34,15 @@ import androidx.navigation.compose.NavHost
     import androidx.navigation.compose.composable
     import androidx.navigation.compose.rememberNavController
     import com.example.utttilife.R
+import com.example.utttilife.components.SharedPreferencesManager.SharedPreferencesManager
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen() {
     val backgroundImage: Painter = painterResource(id = R.drawable.background_login)
     val navController = rememberNavController()
+    // Antes de mostrar la pantalla de inicio de sesión, verifica si el usuario ya está autenticado
+
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") {
