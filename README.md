@@ -1,7 +1,7 @@
 
 <div align="center">
 
-<img width="" src="logo_app"  width=160 height=160  align="center">
+<img width="" src="logo_app.png"  width=160 height=160  align="center">
 
 # Seal
 
