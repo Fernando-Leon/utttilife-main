@@ -38,10 +38,10 @@ Breve descripción del proyecto y su propósito.
 
 <div align="center">
 <div>
-<img src="images/Imagen.png" width="30%" />
-<img src="images/Imagen.png" width="30%" />
-<img src="images/Imagen.png" width="30%" />
-<img src="images/Imagen.png" width="30%" />
+<img src="images/Imagen1.jpg" width="30%" />
+<img src="images/Imagen2.jpg" width="30%" />
+<img src="images/Imagen3.jpg" width="30%" />
+<img src="images/Imagen4.jpg" width="30%" />
 </div>
 </div>
 
