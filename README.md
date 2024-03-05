@@ -7,7 +7,7 @@
 
 </div>
 
-<h3>
+<h3 align="center">
 Simplifica tu vida universitaria 🎓
 </h3>
 
