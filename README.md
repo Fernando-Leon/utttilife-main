@@ -1,6 +1,6 @@
 # UTTT ILIFE
 
-![Logo del Proyecto](enlace/a/logo.png)
+![Logo del Proyecto](logo_app.png)
 
 Breve descripción del proyecto y su propósito.
 
