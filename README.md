@@ -17,10 +17,10 @@ Descripción más detallada del proyecto, incluyendo las tecnologías utilizadas
 
 <div align="center">
 <div>
-<img src="images/Imagen.png" width="30%" />
-<img src="images/Imagen.png" width="30%" />
-<img src="images/Imagen.png" width="30%" />
-<img src="images/Imagen.png" width="30%" />
+<img src="images/Imagen1.png" width="30%" />
+<img src="images/Imagen2.png" width="30%" />
+<img src="images/Imagen3.png" width="30%" />
+<img src="images/Imagen4.png" width="30%" />
 </div>
 </div>
 
