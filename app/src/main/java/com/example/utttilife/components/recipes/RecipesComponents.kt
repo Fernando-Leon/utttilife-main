@@ -131,7 +131,7 @@ fun StepsToCreateRecipe() {
 
 //Request for OpenIA Api - Model GPT 4
 suspend fun getResponse(selectedImageBitmap: Bitmap): String = withContext(Dispatchers.IO) {
-    val apiKey = "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"
+    val apiKey = "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"
     val url = "https://api.openai.com/v1/chat/completions"
     val outputStream = ByteArrayOutputStream()
     selectedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
