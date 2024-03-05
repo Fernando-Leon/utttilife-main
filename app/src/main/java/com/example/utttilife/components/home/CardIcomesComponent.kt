@@ -48,7 +48,7 @@ fun CardIcome(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.house_isometric),
+                    painter = painterResource(id = R.drawable.casacolor),
                     contentDescription = null,
                     modifier = Modifier
                         .width(250.dp)
