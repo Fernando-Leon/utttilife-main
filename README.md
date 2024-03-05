@@ -1,7 +1,7 @@
 
 <div align="center">
 
-<img width="" src="logo_app.png"  width=160 height=160  align="center">
+<img width="" src="logo_app.png"  width=300 height=300  align="center">
 
 # Seal
 
@@ -12,6 +12,17 @@ Breve descripción del proyecto y su propósito.
 ## Descripción
 
 Descripción más detallada del proyecto, incluyendo las tecnologías utilizadas (Kotlin, Node.js, Python, etc.), el propósito de la aplicación y sus características principales.
+
+## 📱 Imagenes de la app
+
+<div align="center">
+<div>
+<img src="images/Imagen.png" width="30%" />
+<img src="images/Imagen.png" width="30%" />
+<img src="images/Imagen.png" width="30%" />
+<img src="images/Imagen.png" width="30%" />
+</div>
+</div>
 
 ## Instalación
 
