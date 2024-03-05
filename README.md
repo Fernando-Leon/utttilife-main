@@ -7,21 +7,17 @@
 
 </div>
 
-Breve descripción del proyecto y su propósito.
+<h3>
+Simplifica tu vida universitaria 🎓
+</h3>
 
 ## Descripción
 
-<p>Tecnologias usadas para el desarrollo de la aplicacion</p>
+UTTTILIFE es una aplicación móvil diseñada para transformar la experiencia universitaria, ofreciendo una solución integral y centrada en el usuario para la gestión del tiempo y el acceso a recursos y servicios esenciales. Con funcionalidades como la gestión de horarios y la búsqueda de alojamiento, UTTTILIFE se dedica a simplificar la vida universitaria. Una novedad significativa es el enfoque en la salud mental, proporcionando un espacio interactivo donde los estudiantes pueden obtener apoyo a través de un chat basado en inteligencia artificial. Este chat sugiere lecturas y recursos basados en una amplia biblioteca de libros de psicología, personalizando las recomendaciones para cada usuario. Al combinar accesibilidad y eficiencia, UTTTILIFE empodera a los estudiantes para alcanzar sus metas académicas y personales, afrontando los desafíos universitarios con mayor confianza y apoyo.
 
-<p align="left"> 
-    <a href="https://www.w3schools.com/css/" target="_blank"
-    rel="noreferrer"> <img
-      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3"
-      width="40" height="40" /> </a> 
-    <img
-      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40"
-      height="40" /> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"
-    rel="noreferrer"> 
+## Tecnologias usadas para el desarrollo de la aplicacion
+
+<p align="left">
     <img
       src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
       alt="javascript" width="40" height="40" /> </a> <a href="https://kotlinlang.org" target="_blank" rel="noreferrer">
@@ -33,6 +29,8 @@ Breve descripción del proyecto y su propósito.
       src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python"
       width="40" height="40" /> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
 
+</p>
+
 
 ## 📱 Imagenes de la app
 
@@ -42,33 +40,26 @@ Breve descripción del proyecto y su propósito.
 <img src="images/Imagen2.jpg" width="30%" />
 <img src="images/Imagen3.jpg" width="30%" />
 <img src="images/Imagen4.jpg" width="30%" />
+<img src="images/Imagen5.jpg" width="30%" />
+<img src="images/Imagen6.jpg" width="30%" />
+<img src="images/Imagen7.jpg" width="30%" />
+<img src="images/Imagen8.jpg" width="30%" />
+<img src="images/Imagen9.jpg" width="30%" />
 </div>
 </div>
 
 ## Instalación
 
-1. **Descargar el APK:** [Enlace para descargar el APK](enlace/al/apk)
+1. **Descargar el APK:** [Enlace para descargar el APK](apks/apk_version_1.0.0.apk)
 
 2. **Instalar en Dispositivo Android:** Después de descargar el APK, transfiera el archivo a su dispositivo Android y ábralo para iniciar el proceso de instalación. Es posible que deba habilitar la instalación de aplicaciones desde fuentes desconocidas en la configuración de su dispositivo.
 
-## Contribución
+## Autores
 
-¡Las contribuciones son bienvenidas! Si deseas contribuir a este proyecto, sigue estos pasos:
+Proyecto desarrollado por alumnos de la Universidad Tecnologica Tula Tepeji
 
-1. Forkea el repositorio.
-2. Clona tu bifurcación (`git clone https://github.com/TU_USUARIO/nombre-del-proyecto.git`).
-3. Crea tu propia rama (`git checkout -b feature/AmazingFeature`).
-4. Realiza cambios y haz commit (`git commit -m 'Agrega una característica increíble'`).
-5. Empuja tus cambios a la rama (`git push origin feature/AmazingFeature`).
-6. Abre una solicitud de extracción.
 
-## Licencia
-
-Este proyecto está bajo la [Licencia XYZ](enlace/a/licencia) (o cualquier otra licencia que estés utilizando). Consulta el archivo `LICENSE` para obtener más detalles.
-
-## Contacto
-
-Si tienes alguna pregunta o sugerencia sobre el proyecto, no dudes en ponerte en contacto con nosotros a través de [correo electrónico](mailto:tuemail@example.com) o [creando un issue](enlace/al/repo/issues).
+Si tienes alguna pregunta o sugerencia sobre el proyecto, no dudes en ponerte en contacto con nosotros a través de [correo electrónico](mailto:utttilife@gmail.com).
 
 ---
 
