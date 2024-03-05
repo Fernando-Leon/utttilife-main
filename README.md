@@ -1,9 +1,9 @@
 
 <div align="center">
 
-<div align="center">
-    <img src="logo_app.png" alt="Logo de la aplicación" style="border-radius: 50%;" />
-</div>
+<img width="" src="logo_app.png"  width=300 height=300  align="center">
+
+
 
 # UTTT ILIFE
 
