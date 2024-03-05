@@ -50,7 +50,7 @@ UTTTILIFE es una aplicación móvil diseñada para transformar la experiencia un
 
 ## Instalación
 
-1. **Descargar el APK:** [Enlace para descargar el APK](apks/apk_version_1.0.0.apk)
+1. **Descargar el APK:** [Enlace para descargar el APK](apks/)
 
 2. **Instalar en Dispositivo Android:** Después de descargar el APK, transfiera el archivo a su dispositivo Android y ábralo para iniciar el proceso de instalación. Es posible que deba habilitar la instalación de aplicaciones desde fuentes desconocidas en la configuración de su dispositivo.
 
