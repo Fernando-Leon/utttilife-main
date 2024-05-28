@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object BuildingsClient {
     fun makeBuildingsService(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api-utttilife.azurewebsites.net/")
+            .baseUrl("https://api-utttilife.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

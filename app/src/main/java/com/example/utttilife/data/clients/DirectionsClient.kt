@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object DirectionsClient {
     fun makeDirectionsService(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.openrouteservice.org/")
+            .baseUrl("https://api-utttilife.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

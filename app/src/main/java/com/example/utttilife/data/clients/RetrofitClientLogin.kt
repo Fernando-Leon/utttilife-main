@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClientLogin {
-    private const val BASE_URL = "https://api-utttilife.azurewebsites.net/api/v1.0/auth/"
+    private const val BASE_URL = "https://api-utttilife.onrender.com/api/v1.0/auth/"
 
     fun create(): ApiService {
         val retrofit = Retrofit.Builder()
