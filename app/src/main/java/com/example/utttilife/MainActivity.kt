@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                    // LoginScreen()
                  MainScreen()
-                    //RegisterApartamentScreen()
+                    //suka
                 }
             }
         }
