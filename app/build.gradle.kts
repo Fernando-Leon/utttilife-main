@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.13.1"
 }
 
 android {
@@ -95,4 +96,6 @@ dependencies {
     //Dependencia para el chat bot
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
+    //Dependencias para DataDog
+    implementation ("com.datadoghq:dd-sdk-android-rum:2.11.0")
 }
